@@ -6,7 +6,7 @@ export interface SearchBarProps {
 }
 
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
-  const handleSubmit = (formData: FormData) => {
+  async function handleFormAction(formData: FormData) {
     const query = formData.get('query')?.toString().trim();
 
     if (!query) {
@@ -15,7 +15,7 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
     }
 
     onSubmit(query);
-  };
+  }
 
   return (
     <header className={styles.header}>
@@ -28,7 +28,8 @@ const SearchBar = ({ onSubmit }: SearchBarProps) => {
         >
           Powered by TMDB
         </a>
-        <form className={styles.form} action={handleSubmit}>
+
+        <form action={handleFormAction} className={styles.form}>
           <input
             className={styles.input}
             type="text"
